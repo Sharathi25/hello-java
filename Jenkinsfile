@@ -19,7 +19,7 @@ pipeline {
 
         stage ('Build Java Application') {
             steps {
-                sh 'mvn clean install'
+                bat 'mvn clean install'
             }
         }
 
