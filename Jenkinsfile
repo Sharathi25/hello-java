@@ -32,7 +32,7 @@ pipeline {
         stage ('Push Docker Image to Docker Hub') {
             steps {
                 withDockerRegistry([credentialsId: 'docker-hub-credentials', url: 'https://index.docker.io/v1/']) {
-                    bat 'docker push %IMAGE_NAME%:%IMAGE_TAG% .'
+                    bat 'docker push %IMAGE_NAME%:%IMAGE_TAG%'
                 }
             }
         }
