@@ -1,13 +1,39 @@
-// 
 pipeline {
     agent any
+
+    environment {
+        IMAGE_NAME = "sharathi25/java-helloworld"
+        IMAGE_TAG = "latest"
+    }
 
     stages {
         stage ('Checkout Code') {
             steps {
-                git branch: 'sub-branch',  // Change if using a different branch
-                    credentialsId: 'github-credentials', 
-                    url: 'https://github.com/Sharathi25/hello-java.git'
+                withCredentials([usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
+                    git branch: 'sub-branch', 
+                        credentialsId: 'github-credentials', 
+                        url: 'https://github.com/Sharathi25/hello-java.git'
+                }
+            }
+        }
+
+        stage ('Build Java Application') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+
+        stage ('Build Docker Image') {
+            steps {
+                sh 'docker build -t $IMAGE_NAME:$IMAGE_TAG .'
+            }
+        }
+
+        stage ('Push Docker Image to Docker Hub') {
+            steps {
+                withDockerRegistry([credentialsId: 'docker-hub-credentials', url: 'https://index.docker.io/v1/']) {
+                    sh 'docker push $IMAGE_NAME:$IMAGE_TAG'
+                }
             }
         }
     }
