@@ -17,7 +17,7 @@ pipeline {
             }
         }
 
-        stage ('Build Java App') {
+        stage ('Build Java Application') {
             steps {
                 sh 'mvn clean install'
             }
