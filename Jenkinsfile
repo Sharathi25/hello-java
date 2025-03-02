@@ -35,7 +35,6 @@ pipeline {
                     bat 'docker push %IMAGE_NAME%:%IMAGE_TAG%'
                 }
             }
-            echo "Build is success"
         }
     }
 }
