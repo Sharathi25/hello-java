@@ -4,7 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = "sharathi25/java-helloworld"
         IMAGE_TAG = "latest"
-        JAR_NAME = "hello-world-java-1.0-SNAPSHOT.jar"
+        JAR_NAME = "target/hello-world-java-1.0-SNAPSHOT.jar"
     }
 
     stages {
@@ -31,7 +31,7 @@ pipeline {
 
         stage ('Build Docker Image') {
             steps {
-                bat 'docker build -t %IMAGE_NAME%:%IMAGE_TAG% .'
+                bat 'docker build -t  %IMAGE_NAME%:%IMAGE_TAG% .'
             }
         }
 
