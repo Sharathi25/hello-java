@@ -11,7 +11,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
                     git branch: 'sub-branch', 
-                        credentialsId: 'github-credentials', 
+                        credentialsId: 'github-redentials', 
                         url: 'https://github.com/Sharathi25/hello-java.git'
                 }
             }
