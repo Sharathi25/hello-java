@@ -25,7 +25,8 @@ pipeline {
         }
          stage ('Running the Jar file') {
             steps {
-                bat 'java -jar %JAR_NAME%'
+                withEnv(["JAR_NAME=hello-world-java-1.0-SNAPSHOT.jar"]) {
+                bat "if exist target/%JAR_NAME% ( java -jar target/%JAR_NAME% ) else ( echo JAR file not found! && exit /b 1 )"
             }
          }
 
