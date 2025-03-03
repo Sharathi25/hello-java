@@ -3,8 +3,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = "sharathi25/java-helloworld"
-        IMAGE_TAG = "latest"
-        JAR_NAME = "hello-world-java-1.0-SNAPSHOT.jar"
+        IMAGE_TAG = "latest image"
     }
 
     stages {
@@ -23,13 +22,6 @@ pipeline {
                 bat 'mvn clean install'
             }
         }
-         stage ('Running the Jar file') {
-            steps {
-                withEnv(["JAR_NAME=hello-world-java-1.0-SNAPSHOT.jar"]) {
-                bat "if exist target/%JAR_NAME% ( java -jar target/%JAR_NAME% ) else ( echo JAR file not found! && exit /b 1 )"
-            }
-         }
-         }
 
         stage ('Build Docker Image') {
             steps {
