@@ -29,6 +29,7 @@ pipeline {
                 bat "if exist target/%JAR_NAME% ( java -jar target/%JAR_NAME% ) else ( echo JAR file not found! && exit /b 1 )"
             }
          }
+         }
 
         stage ('Build Docker Image') {
             steps {
