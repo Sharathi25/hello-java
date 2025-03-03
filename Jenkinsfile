@@ -4,7 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = "sharathi25/java-helloworld"
         IMAGE_TAG = "latest"
-        JAR_NAME = "hello-world-java-1.0-SNAPSHOT.jar"
+        JAR_NAME = "dir /s /b hello-java/target/hello-world-java-1.0-SNAPSHOT.jar"
     }
 
     stages {
@@ -25,7 +25,7 @@ pipeline {
         }
          stage ('Running the Jar file') {
             steps {
-                bat 'java -jar cd D:/hello-java/target/%JAR_NAME%'
+                bat 'java -jar %JAR_NAME%'
             }
          }
 
