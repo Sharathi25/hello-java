@@ -9,9 +9,9 @@ pipeline {
     stages {
         stage ('Checkout Code') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
+                withCredentials([usernamePassword(credentialsId: '', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
                     git branch: 'sub-branch', 
-                        credentialsId: 'github-redentials', 
+                        // credentialsId: 'github-credentials', 
                         url: 'https://github.com/Sharathi25/hello-java.git'
                 }
             }
