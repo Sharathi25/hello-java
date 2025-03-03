@@ -4,6 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = "sharathi25/java-helloworld"
         IMAGE_TAG = "latest"
+        JAR_NAME = "hello-world-java-1.0-SNAPSHOT.jar"
     }
 
     stages {
@@ -22,6 +23,11 @@ pipeline {
                 bat 'mvn clean install'
             }
         }
+         stage ('Running the Jar file') {
+            steps {
+                bat 'java -jar %JAR_NAME%'
+            }
+         }
 
         stage ('Build Docker Image') {
             steps {
