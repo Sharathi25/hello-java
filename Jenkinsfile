@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = "sharathi25/java-helloworld"
-        IMAGE_TAG = "latest image"
+        IMAGE_TAG = "latest image ."
     }
 
     stages {
