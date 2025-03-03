@@ -4,7 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = "sharathi25/java-helloworld"
         IMAGE_TAG = "latest"
-        JAR_NAME = "hello-java/target/hello-world-java-1.0-SNAPSHOT.jar"
+        JAR_NAME = "D:\hello-java\target\hello-world-java-1.0-SNAPSHOT.jar"
     }
 
     stages {
