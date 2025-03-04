@@ -36,5 +36,11 @@ pipeline {
                 }
             }
         }
+
+        stage('Verify Running Container') {
+            steps {
+                bat 'docker ps -a'
+            }
+        }
     }
 }
