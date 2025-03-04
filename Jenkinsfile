@@ -4,6 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = "sharathi25/java-helloworld"
         IMAGE_TAG = "latest"
+        CONTAINER_NAME = "java-container"
     }
 
     stages {
@@ -29,11 +30,12 @@ pipeline {
             }
         }
 
-        stage ('Push Docker Image to Docker Hub') {
+        stage('Run Docker Container') {
             steps {
-                withDockerRegistry([credentialsId: 'docker-hub-credentials', url: 'https://index.docker.io/v1/']) {
-                    bat 'docker push %IMAGE_NAME%:%IMAGE_TAG%'
-                }
+                bat 'docker stop ${CONTAINER_NAME} || true
+                    docker rm ${CONTAINER_NAME} || true'
+
+                    bat 'docker run -d --name ${CONTAINER_NAME} -p 5555:8080 ${IMAGE_NAME}:latest'
             }
         }
 
@@ -42,5 +44,14 @@ pipeline {
                 bat 'docker ps -a'
             }
         }
+
+        stage ('Push Docker Image to Docker Hub') {
+            steps {
+                withDockerRegistry([credentialsId: 'docker-hub-credentials', url: 'https://index.docker.io/v1/']) {
+                    bat 'docker push %IMAGE_NAME%:%IMAGE_TAG%'
+                }
+            }
+        }
+
     }
 }
