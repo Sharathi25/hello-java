@@ -32,7 +32,7 @@ pipeline {
 
         stage('Run Docker Container') {
             steps {
-                bat 'docker stop %{CONTAINER_NAME} || exit 0'
+                bat 'docker stop %{CONTAINER_NAME}2>nul || echo Container not running, continuing...'
 
                     bat 'docker run -d --name %{CONTAINER_NAME} -p 5555:8080 %{IMAGE_NAME}'
             }
