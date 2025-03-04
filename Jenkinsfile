@@ -34,7 +34,7 @@ pipeline {
             steps {
                 bat 'docker stop %{CONTAINER_NAME} || exit 0'
 
-                    bat 'docker run -d --name %{CONTAINER_NAME} -p 5555:8080 %{IMAGE_NAME}:latest'
+                    bat 'docker run -d --name %{CONTAINER_NAME} -p 5555:8080 %{IMAGE_NAME}'
             }
         }
 
