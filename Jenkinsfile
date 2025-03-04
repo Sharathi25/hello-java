@@ -4,7 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = "sharathi25/java-helloworld"
         IMAGE_TAG = "latest"
-        CONTAINER_NAME = "jjava-helloworld"
+        CONTAINER_NAME = "java-helloworld"
     }
 
     stages {
