@@ -32,8 +32,7 @@ pipeline {
 
         stage('Run Docker Container') {
             steps {
-                bat 'docker stop %{CONTAINER_NAME} || true
-                    docker rm %{CONTAINER_NAME} || true'
+                bat 'docker stop %{CONTAINER_NAME} || true'
 
                     bat 'docker run -d --name %{CONTAINER_NAME} -p 5555:8080 %{IMAGE_NAME}:latest'
             }
