@@ -103,12 +103,26 @@ pipeline {
             }
         }
 
-        stage ('Push Docker Image to Docker Hub') {
-            steps {
-                withDockerRegistry([credentialsId: 'docker-hub-credentials', url: 'https://index.docker.io/v1/']) {
-                    bat 'docker push %IMAGE_NAME%:%IMAGE_TAG%'
-                }
-            }
+        //stage ('Push Docker Image to Docker Hub') {
+            //steps {
+                //withDockerRegistry([credentialsId: 'docker-hub-credentials', url: 'https://index.docker.io/v1/']) {
+                   // bat 'docker push %IMAGE_NAME%:%IMAGE_TAG%'
+               // }
+            //}
+        //}
+        stage('Push Docker Image to Docker Hub') {
+    steps {
+        withCredentials([usernamePassword(
+            credentialsId: 'docker-hub-credentials',
+            usernameVariable: 'DOCKER_USER',
+            passwordVariable: 'DOCKER_PASSWORD'
+        )]) {
+            bat '''
+                echo %DOCKER_PASSWORD% | docker login -u %DOCKER_USER% --password-stdin
+                docker push %IMAGE_NAME%:%IMAGE_TAG%
+            '''
         }
+    }
+}
     }
 }
